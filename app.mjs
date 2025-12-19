@@ -42,7 +42,7 @@ app.use(express.json());
 // Sessions
 app.use(
     session({
-        secret: "mealmateSecretKey123",
+        secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: false
     })
