@@ -30,7 +30,7 @@ router.get("/add", (req, res) => {
 
 // HANDLE ADD RECIPE
 router.post("/add", async (req, res) => {
-    const { name, ingredients, calories, category, vegetarian } = req.body;
+    const { name, ingredients, calories, category, vegetarian, image_url } = req.body;
 
     // NEW VALIDATION
     if (calories === "") {
@@ -43,8 +43,8 @@ router.post("/add", async (req, res) => {
     try {
         const pool = req.app.locals.pool;
         await pool.query(
-            "INSERT INTO recipes (user_id, name, ingredients, calories, category, vegetarian) VALUES (?, ?, ?, ?, ?, ?)",
-            [req.session.user.id, name, ingredients, calories, category, vegetarian ? 1 : 0]
+            "INSERT INTO recipes (user_id, name, ingredients, calories, category, vegetarian, image_url) VALUES (?, ?, ?, ?, ?, ?, ?)",
+            [req.session.user.id, name, ingredients, calories, category, vegetarian ? 1 : 0, image_url]
         );
         res.redirect("/recipes");
     } catch (error) {
@@ -86,7 +86,7 @@ router.get("/edit/:id", async (req, res) => {
 // HANDLE EDIT
 router.post("/edit/:id", async (req, res) => {
     const recipeId = req.params.id;
-    const { name, ingredients, calories, category, vegetarian } = req.body;
+    const { name, ingredients, calories, category, vegetarian, image_url } = req.body;
 
     if (calories === "") {
         return res.render("error", {
@@ -98,9 +98,9 @@ router.post("/edit/:id", async (req, res) => {
     try {
         const pool = req.app.locals.pool;
         await pool.query(
-            `UPDATE recipes SET name=?, ingredients=?, calories=?, category=?, vegetarian=? 
+            `UPDATE recipes SET name=?, ingredients=?, calories=?, category=?, vegetarian=?, image_url=? 
              WHERE id=? AND user_id=?`,
-            [name, ingredients, calories, category, vegetarian ? 1 : 0, recipeId, req.session.user.id]
+            [name, ingredients, calories, category, vegetarian ? 1 : 0, image_url, recipeId, req.session.user.id]
         );
 
         res.redirect("/recipes");
