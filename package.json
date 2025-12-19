@@ -5,7 +5,7 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.mjs"
   },
   "dependencies": {
     "dotenv": "^17.2.3",
