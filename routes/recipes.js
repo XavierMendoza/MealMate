@@ -139,7 +139,7 @@ router.post("/delete/:id", async (req, res) => {
 // SPOONACULAR SEARCH
 router.get("/search", async (req, res) => {
     const query = req.query.q || "chicken";
-    const apiKey = "748ce26c87ce4cb593b33f70dbda41fa";
+    const apiKey = process.env.SPOONACULAR_API_KEY;
 
     try {
         const apiUrl = `https://api.spoonacular.com/recipes/complexSearch?query=${encodeURIComponent(
@@ -179,7 +179,7 @@ router.post("/save", async (req, res) => {
 // GET FULL DETAILS BUTTON ENDPOINT
 router.get("/details/:apiId/:localId", async (req, res) => {
     const { apiId, localId } = req.params;
-    const apiKey = "748ce26c87ce4cb593b33f70dbda41fa";
+    const apiKey = process.env.SPOONACULAR_API_KEY;
 
     try {
         const url = `https://api.spoonacular.com/recipes/${apiId}/information?apiKey=${apiKey}&includeNutrition=true`;
