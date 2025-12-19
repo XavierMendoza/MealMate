@@ -1,0 +1,55 @@
+<%- include("partials/header", { username }) %>
+
+<h2>Edit Recipe</h2>
+
+<form action="/recipes/edit/<%= recipe.id %>" method="POST" class="form-box" id="editRecipeForm">
+
+    <label>Recipe Name</label>
+    <input type="text" name="name" value="<%= recipe.name %>" required>
+
+    <label>Ingredients</label>
+    <textarea name="ingredients" required><%= recipe.ingredients %></textarea>
+
+    <label>Calories</label>
+    <input type="number" name="calories" value="<%= recipe.calories %>" required>
+
+    <label>Category</label>
+    <select name="category" required>
+        <option value="">Select a category</option>
+        <option value="Breakfast" <%= recipe.category === "Breakfast" ? "selected" : "" %>>Breakfast</option>
+        <option value="Lunch" <%= recipe.category === "Lunch" ? "selected" : "" %>>Lunch</option>
+        <option value="Dinner" <%= recipe.category === "Dinner" ? "selected" : "" %>>Dinner</option>
+        <option value="Dessert" <%= recipe.category === "Dessert" ? "selected" : "" %>>Dessert</option>
+    </select>
+
+    <label>
+        <input type="checkbox" name="vegetarian" <%= recipe.vegetarian ? "checked" : "" %>>
+        Vegetarian
+    </label>
+
+    <button type="submit" class="btn">Update Recipe</button>
+</form>
+
+<script>
+document.getElementById("editRecipeForm").addEventListener("submit", function(e) {
+
+    const name = document.querySelector("input[name='name']").value.trim();
+    const ingredients = document.querySelector("textarea[name='ingredients']").value.trim();
+    const calories = document.querySelector("input[name='calories']").value.trim();
+    const category = document.querySelector("select[name='category']").value.trim();
+
+    if (!name || !ingredients || !calories || !category) {
+        e.preventDefault();
+        alert("Error: All fields must be filled out.");
+        return;
+    }
+
+    if (isNaN(calories) || calories <= 0) {
+        e.preventDefault();
+        alert("Calories must be a valid number greater than 0.");
+        return;
+    }
+});
+</script>
+
+<%- include("partials/footer") %>

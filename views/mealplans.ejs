@@ -1,0 +1,32 @@
+<%- include("partials/header", { username }) %>
+
+<h2>Your Meal Plan</h2>
+
+<a href="/mealplans/add" class="btn add-btn">Add Meal Plan</a>
+
+<table class="meal-table">
+    <tr>
+        <th>Day</th>
+        <th>Meal Type</th>
+        <th>Recipe</th>
+        <th>Actions</th>
+    </tr>
+
+    <% plans.forEach(p => { %>
+        <tr>
+            <td><%= p.day_of_week %></td>
+            <td><%= p.meal_type %></td>
+            <td><%= p.recipe_name %></td>
+
+            <td>
+                <a href="/mealplans/edit/<%= p.id %>" class="btn small">Edit</a>
+
+                <form action="/mealplans/delete/<%= p.id %>" method="POST" class="inline-form">
+                    <button class="btn small delete-btn">Delete</button>
+                </form>
+            </td>
+        </tr>
+    <% }) %>
+</table>
+
+<%- include("partials/footer") %>

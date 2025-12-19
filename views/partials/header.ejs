@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MealMate</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+<header>
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="/" class="logo">MealMate</a>
+        </div>
+
+        <% if (typeof username !== "undefined") { %>
+        <div class="nav-right">
+            <a href="/recipes">Recipes</a>
+            <a href="/mealplans">Meal Plans</a>
+            <a href="/logout">Logout</a>
+        </div>
+        <% } %>
+    </nav>
+</header>
+
+<main class="container">

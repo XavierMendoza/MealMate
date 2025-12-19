@@ -1,0 +1,36 @@
+<%- include("partials/header", { username }) %>
+
+<h2>Add Meal Plan</h2>
+
+<form action="/mealplans/add" method="POST" class="form-box">
+
+    <label>Select Recipe</label>
+    <select name="recipe_id">
+        <% recipes.forEach(r => { %>
+            <option value="<%= r.id %>"><%= r.name %></option>
+        <% }) %>
+    </select>
+
+    <label>Day of Week</label>
+    <select name="day_of_week">
+        <option>Monday</option>
+        <option>Tuesday</option>
+        <option>Wednesday</option>
+        <option>Thursday</option>
+        <option>Friday</option>
+        <option>Saturday</option>
+        <option>Sunday</option>
+    </select>
+
+    <label>Meal Type</label>
+    <select name="meal_type">
+        <option>Breakfast</option>
+        <option>Lunch</option>
+        <option>Dinner</option>
+        <option>Snack</option>
+    </select>
+
+    <button type="submit" class="btn">Add Plan</button>
+</form>
+
+<%- include("partials/footer") %>

@@ -1,0 +1,26 @@
+<%- include("partials/header", { username }) %>
+
+<div class="container">
+
+    <h2>Welcome, <%= username %>!</h2>
+
+    <section class="quote-box">
+        <h3>Daily Cooking Inspiration</h3>
+        <p id="quoteText">Loading quote...</p>
+    </section>
+
+    <section class="search-box">
+        <h3>Find a Recipe</h3>
+
+        <input type="text" id="searchInput" placeholder="Search for recipes...">
+
+        <button id="searchBtn" class="btn">Search</button>
+
+        <div id="searchResults" class="results-grid"></div>
+    </section>
+
+    <a href="/recipes" class="btn view-btn">View All Recipes</a>
+
+</div>
+
+<%- include("partials/footer") %>

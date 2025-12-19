@@ -1,0 +1,54 @@
+<%- include("partials/header", { username }) %>
+
+<h2>Add Recipe</h2>
+
+<form action="/recipes/add" method="POST" class="form-box" id="addRecipeForm">
+
+    <label>Recipe Name</label>
+    <input type="text" name="name" required>
+
+    <label>Ingredients</label>
+    <textarea name="ingredients" required></textarea>
+
+    <label>Calories</label>
+    <input type="number" name="calories" required>
+
+    <label>Category</label>
+    <select name="category" required>
+        <option value="">Select a category</option>
+        <option>Breakfast</option>
+        <option>Lunch</option>
+        <option>Dinner</option>
+        <option>Dessert</option>
+    </select>
+
+    <label>
+        <input type="checkbox" name="vegetarian"> Vegetarian
+    </label>
+
+    <button type="submit" class="btn">Add Recipe</button>
+</form>
+
+<script>
+document.getElementById("addRecipeForm").addEventListener("submit", function(e) {
+
+    const name = document.querySelector("input[name='name']").value.trim();
+    const ingredients = document.querySelector("textarea[name='ingredients']").value.trim();
+    const calories = document.querySelector("input[name='calories']").value.trim();
+    const category = document.querySelector("select[name='category']").value.trim();
+
+    if (!name || !ingredients || !calories || !category) {
+        e.preventDefault();
+        alert("Error: All fields must be filled out.");
+        return;
+    }
+
+    if (isNaN(calories) || calories <= 0) {
+        e.preventDefault();
+        alert("Calories must be a valid number greater than 0.");
+        return;
+    }
+});
+</script>
+
+<%- include("partials/footer") %>
